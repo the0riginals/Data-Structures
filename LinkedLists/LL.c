@@ -96,7 +96,7 @@ NODE * deleteBeg(NODE * start){
 }
 
 
-
+//Some bug (if the value is not in the List then doesn't work properly)
 NODE * deleteValue(NODE * start, int value){
     if(start == NULL){
         printf("\n\a!! UNDERFLOW !!");
