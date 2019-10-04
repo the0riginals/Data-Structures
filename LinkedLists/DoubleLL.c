@@ -62,7 +62,7 @@ NODE * insertEnd(NODE * start, int data){
 NODE * deleteValue(NODE * start, int data){
 
 	if(start == NULL){
-		printf("\n The List is Empty");
+		printf("\n\a!! UNDERFLOW !!");
 		return start;
 	}
 	
@@ -76,9 +76,40 @@ NODE * deleteValue(NODE * start, int data){
 		currNode = currNode->next;
 	}
 	
-	(currNode->prev)->next = currNode->next;
+	//(currNode->prev)->next = currNode->next;
+	currNode = currNode->prev;
+	currNode->next = (currNode->next)->next;
 	return start;
 } 
+
+
+NODE * deleteBeg(NODE * start){
+	if(start == NULL){
+		printf("\n\a!! UNDERFLOW !!");
+		return start;
+	}
+	printf("\nDeleted value: %d", start->data);
+	start = start->next;
+	start->prev = NULL;
+	return start;
+}
+
+
+NODE * deleteEnd(NODE * start){
+	if(start == NULL){
+		printf("\n\a!! UNDERFLOW !!");
+		return start;
+	}
+
+	NODE * currNode = start;
+	while(currNode->next != NULL){
+		currNode = currNode->next;
+	}
+	printf("\nDeleted Value: %d", currNode->data);
+	currNode = currNode->prev;
+	currNode->next = NULL;
+	return start;
+}
 
 
 void traverseLL(NODE * start){
@@ -98,6 +129,23 @@ void traverseLL(NODE * start){
 }
 
 
+void reverseTraverse(NODE * start){
+	if(start == NULL){
+		printf("\n\a!!The List is Empty!!");
+		return;
+	}
+	NODE * currNode = start;
+	while(currNode->next != NULL){
+		currNode = currNode->next;
+	}
+	printf("\n");
+	while(currNode != NULL){
+		printf("%d -> ", currNode->data);
+		currNode = currNode->prev;
+	}
+	printf("NULL");
+}
+
 
 void main(){
 
@@ -105,16 +153,19 @@ void main(){
 	NODE * start = NULL;
 	
 	
-	while(choice != 4){
+	while(choice != 8){
 	
-		printf("\n==================");
-		printf("\n        MENU      ");
-		printf("\n==================");
+		printf("\n====================");
+		printf("\n         MENU       ");
+		printf("\n====================");
 		printf("\n1.  Insert Beginning");
 		printf("\n2.  Insert End");
-		printf("\n3.  Print List");
-		printf("\n4.  Delete value");
-		printf("\n5.     EXIT");
+		printf("\n3.  Delete value");
+		printf("\n4.  Delete Beg");
+		printf("\n5.  Delete End");
+		printf("\n6.  Print List");
+		printf("\n7.  Reverse Traverse");
+		printf("\n8.     EXIT");
 		
 		printf("\nEnter your choice : ");
 		scanf("%d", &choice);
@@ -134,22 +185,33 @@ void main(){
 				break;
 				
 			case 3:
-				traverseLL(start);
-				break;
-				
-			case 4:
 				printf("\nEnter the value to be deleted: ");
 				scanf("%d", &temp);
 				start = deleteValue(start, temp);
 				break;
 			
-			case 5:
-				printf("\n The Originals wish you a Good Luck");
+			case 4:
+				start = deleteBeg(start);
 				break;
-				
+			
+			case 5:
+				start = deleteEnd(start);
+				break;
+			
+			case 6:
+				traverseLL(start);
+				break;
+		
+			case 7:
+				reverseTraverse(start);
+				break;
+			
+			case 8:
+				printf("\n!!!  The Originals wish you a Good Luck ;-)   !!!");
+				break;
+			
 			default:
 				printf("\n INVALID CHOICE");
 		}
 	}
 }
-
