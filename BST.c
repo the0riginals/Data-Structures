@@ -111,7 +111,7 @@ void deleteNode(NODE * * root, int data){
             //Giving Segmentation fault
             int temp = findLargest((*root)->left);
             (*root)->data = temp;
-            deleteNode(root, temp);
+            deleteNode(&(*root)->left, temp);
         }
     }
 }
@@ -144,22 +144,65 @@ void postorder(NODE * root){
 }
 
 
-void main(){
+int main(){
     NODE * root = NULL;
-    int temp, n;
-    printf("\nEnter n: ");
-    scanf("%d", &n);
-    for(int i = 0; i<n; i++){
-        scanf("%d", &temp);
-        root = insertNode(root, temp);
-    }
-    printf("\ninorder Print\n");
-    inorder(root);
-    printf("\nLargest : %d", findLargest(root));
-    printf("\nSmallest  %d", findSmallest(root));   
-    deleteNode(&root, 5);
+    int temp, choice = 0;
 
-    printf("\ninorder Print\n");
-    inorder(root);
+    while(choice != 8){
+        printf("\n---- MENU ----");
+        printf("\n1. Insert Node");
+        printf("\n2. Find Smallest");
+        printf("\n3. Find Greatest");
+        printf("\n4. Delete Node");
+        printf("\n5. In-Order Print");
+        printf("\n6. Pre-Order Print");
+        printf("\n7. Post-Order Print");
+        printf("\n8. EXIT");
+        printf("\nEnter your choice : ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+        case 1:
+            printf("\nEnter the data to be added : ");
+            scanf("%d", &temp);
+            root = insertNode(root, temp);
+            break;
+        
+        case 2:
+            printf("\nSmallest : %d", findSmallest(root));
+            break;
+        
+        case 3:
+            printf("\nLargest : %d", findLargest(root));
+            break;
+        
+        case 4:
+            printf("\nEnter the data to delete:  ");
+            scanf("%d", &temp);
+            deleteNode(&root, temp);
+            break;
+        
+        case 5:
+            inorder(root);
+            break;
+        
+        case 6:
+            preorder(root);
+            break;
+        
+        case 7:
+            postorder(root);
+            break;
+        
+        case 8:
+            break;
+
+        default:
+            printf("\n!! Invalid Choice !!");
+        }
+
+    }
+    free(root);
 }
 
