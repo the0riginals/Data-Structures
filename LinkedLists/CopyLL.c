@@ -27,26 +27,7 @@ NODE * insertEnd(NODE * start, int data){
     return start;
 
 }
-/*
-NODE * copyLL(NODE * start, NODE * newstart){
-    if(start==NULL){
-        printf("\nOriginal List is empty");
-        return NULL;
-    }
-    NODE * newnode = malloc(sizeof(NODE));
-    if(newnode==NULL){
-        printf("\nUnderflow");
-        return NULL;
-    }
-    if(start->next==NULL){
-        newnode->data = start->data;
-        newnode->next = NULL;
-        newstart = newnode;
-        return newstart;
-    }
 
-}
-*/
 NODE * copyList(NODE * start){
     if(start==NULL){
         return NULL;
