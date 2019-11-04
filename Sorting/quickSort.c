@@ -25,7 +25,7 @@ int partition(int a[], int start,int end){
     int pivot = a[start];
     int i, j, swap;
     i = start + 1;
-    j = end - 1;
+    j = end;
 
     while(1){
         while(i<=j && a[i]<=pivot){
